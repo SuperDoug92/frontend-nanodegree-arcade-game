@@ -14,7 +14,7 @@ for (col = 0; col < numCols; col++) {
 }
 
 Enemy.prototype.update = function(dt) {
-    this.x = xPositions[xPositions.indexOf(this.x)+1];
+    this.x = xPositions[xPositions.indexOf(this.x)+1]*dt;
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -27,9 +27,19 @@ Enemy.prototype.render = function() {
 
 var player = function(){
   this.sprite = 'images/char-boy.png';
+  this.x = 101*2;
+  this.y = 83*5-20;
 }
 player.prototype = Object.create(Enemy.prototype);
 player.prototype.constructor = player;
+player.prototype.update = function(){
+
+}
+player.prototype.handleInput = function(){
+  
+}
+
+// player.prototype.render = Enemy.prototype.render;
 
 // Now write your own player class
 // This class requires an update(), render() and
