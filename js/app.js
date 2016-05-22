@@ -1,20 +1,17 @@
 // Enemies our player must avoid
-var Enemy = function(yPosition) {
+var Enemy = function(yPosition, speed) {
     this.sprite = 'images/enemy-bug.png';
-    this.x=0;
+    this.x=-83;
     this.y=yPosition;
+    this.speed = speed;
+
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-xPositions = []
-numCols = 5
-for (col = 0; col < numCols; col++) {
-  xPositions.push(col * 101);
-}
 
 Enemy.prototype.update = function(dt) {
-    this.x = xPositions[xPositions.indexOf(this.x)+1]*dt;
+    this.x += this.speed*dt;
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -36,7 +33,7 @@ player.prototype.update = function(){
 
 }
 player.prototype.handleInput = function(){
-  
+
 }
 
 // player.prototype.render = Enemy.prototype.render;
@@ -49,8 +46,21 @@ enemyYpositions = [];
 var tileHeight = 83;
 enemyYpositions.push(tileHeight-20,tileHeight*2-20,tileHeight*3-20);
 
+var NumEnemies = 4;
+
 var allEnemies = []
-allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)]));
+setInterval(function(){
+  allEnemies.forEach(function(enemy){
+    if (enemy.x>550){
+      enemy.x = -83;
+      enemy.y = enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)];
+    }
+  });
+  if (allEnemies.length < NumEnemies){
+    allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)],101));
+  }
+}, 2000);
+allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)],101));
 
 var player = new player;
 // Now instantiate your objects.
