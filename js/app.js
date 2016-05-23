@@ -1,20 +1,21 @@
 //Character prototype parent object
 var Character = function(){}
 Character.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Enemies our player must avoid
 var Enemy = function(yPosition, speed) {
-    this.sprite = 'images/enemy-bug.png';
-    this.x=-83;
-    this.speed = speed;
-    this.y=yPosition;
+  this.sprite = 'images/enemy-bug.png';
+  this.x=-83;
+  this.speed = speed;
+  this.y=yPosition;
 };
+
 Enemy.prototype = Object.create(Character.prototype);
 Enemy.constructor = Enemy;
 Enemy.prototype.update = function(dt) {
-    this.x += this.speed*dt;
+  this.x += this.speed*dt;
 };
 
 var player = function(){
@@ -25,7 +26,13 @@ var player = function(){
 player.prototype = Object.create(Character.prototype);
 player.prototype.constructor = player;
 player.prototype.update = function(){
-
+  if(this.y<83-20){
+    this.reset();
+  }
+}
+player.prototype.reset = function(){
+  this.x = 101*2;
+  this.y = 83*5-20;
 }
 player.prototype.handleInput = function(input){
   switch(input) {
@@ -33,13 +40,19 @@ player.prototype.handleInput = function(input){
       this.y -= 83
       break;
     case "down":
-      this.y += 83
+      if (this.y < 395){
+        this.y += 83
+      }
       break;
     case "left":
-      this.x -= 101
+      if (this.x > 0){
+        this.x -= 101
+      }
       break;
     case "right":
-      this.x += 101
+      if (this.x < 404){
+        this.x += 101
+      }
       break;
   }
 }
