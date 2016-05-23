@@ -77,7 +77,7 @@ enemyYpositions = [];
 var tileHeight = 83;
 enemyYpositions.push(tileHeight-20,tileHeight*2-20,tileHeight*3-20);
 
-var NumEnemies = 4;
+var NumEnemies = 3;
 
 var allEnemies = []
 setInterval(function(){
