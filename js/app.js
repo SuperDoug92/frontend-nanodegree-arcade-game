@@ -15,13 +15,13 @@ var Enemy = function(yPosition, speed) {
 };
 
 Enemy.prototype = Object.create(Character.prototype);
-Enemy.constructor = Enemy;
+Enemy.prototype.constructor = Enemy;
 Enemy.prototype.update = function(dt) {
   this.x += this.speed*dt;
 };
 
 var player = function(){
-  this.sprite = 'images/char-boy.png';
+  this.sprite;
   this.x = 101*2;
   this.y = 83*5-20;
   this.width = 101;
@@ -82,7 +82,7 @@ var NumEnemies = 4;
 var allEnemies = []
 setInterval(function(){
   allEnemies.forEach(function(enemy){
-    if (enemy.x>550){
+    if (enemy.x>550-83){
       enemy.x = -83;
       enemy.y = enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)];
     }

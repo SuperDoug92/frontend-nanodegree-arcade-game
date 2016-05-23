@@ -32,6 +32,21 @@ var Engine = (function(global) {
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
+
+    function renderCharacters(){
+      var characters = [
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
+      ]
+      numCols = 5;
+      for (col = 0; col < numCols; col++) {
+        ctx.drawImage(Resources.get(characters[col]), col * 101, 83);
+      }
+    }
+
     function main() {
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
@@ -66,7 +81,7 @@ var Engine = (function(global) {
     function init() {
         reset();
         lastTime = Date.now();
-        main();
+        renderCharacters();
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -167,13 +182,36 @@ var Engine = (function(global) {
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
+
     Resources.load([
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png',
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
     ]);
+
+    $("canvas").click(function(e){
+      var x = (e.pageX-$("canvas").offset().left);
+      var y = (e.pageY-$("canvas").offset().top);
+      console.log(x,y);
+      if (player.sprite === undefined){
+        if(135<y & y<240){
+          if(x<101) {player.sprite = 'images/char-boy.png';}
+          else if(x<202){player.sprite = 'images/char-cat-girl.png';}
+          else if(x<303){player.sprite = 'images/char-horn-girl.png';}
+          else if(x<404){player.sprite = 'images/char-pink-girl.png';}
+          else if(x<505){player.sprite = 'images/char-princess-girl.png';}
+          if(0<x<505){
+            main();
+          }
+        }
+      }
+    });
     Resources.onReady(init);
 
     /* Assign the canvas' context object to the global variable (the window
