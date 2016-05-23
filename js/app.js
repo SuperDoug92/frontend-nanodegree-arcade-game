@@ -10,6 +10,8 @@ var Enemy = function(yPosition, speed) {
   this.x=-83;
   this.speed = speed;
   this.y=yPosition;
+  this.width = 101;
+  this.height = 83;
 };
 
 Enemy.prototype = Object.create(Character.prototype);
@@ -22,6 +24,8 @@ var player = function(){
   this.sprite = 'images/char-boy.png';
   this.x = 101*2;
   this.y = 83*5-20;
+  this.width = 101;
+  this.height = 83;
 }
 player.prototype = Object.create(Character.prototype);
 player.prototype.constructor = player;
@@ -29,6 +33,15 @@ player.prototype.update = function(){
   if(this.y<83-20){
     this.reset();
   }
+
+  allEnemies.forEach(function(enemy){
+    if (enemy.x < player.x + player.width &&
+       enemy.x + enemy.width > player.x &&
+       enemy.y +70 < player.y + 70 + player.height &&
+       enemy.height + enemy.y+70 > player.y + 70) {
+      player.reset();
+    }
+  })
 }
 player.prototype.reset = function(){
   this.x = 101*2;
@@ -81,6 +94,8 @@ setInterval(function(){
 allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)],101));
 
 var player = new player;
+
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
