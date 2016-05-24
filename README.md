@@ -1,6 +1,16 @@
-frontend-nanodegree-arcade-game
-===============================
+#Frogger
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+##Getting Started
+1. Download the files and unzip them
+2. Open index.html in and HTML5 capable browser
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+##Objective
+The goal of the game is to get your character past the enemies and to the water
+
+##Gameplay
+*Click on the character you would like to use
+*Use the arrow keys to move up, down, left, and right
+
+##Future Development
+*Add score functionality
+*Add visual feedback for winning and dying besides a simple reset
