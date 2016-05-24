@@ -35,13 +35,13 @@ player.prototype.update = function(){
   }
 
   allEnemies.forEach(function(enemy){
-    if (enemy.x < player.x + player.width &&
-       enemy.x + enemy.width > player.x &&
-       enemy.y +70 < player.y + 70 + player.height &&
-       enemy.height + enemy.y+70 > player.y + 70) {
-      player.reset();
+    if (enemy.x < this.x + this.width &&
+       enemy.x + enemy.width > this.x &&
+       enemy.y +70 < this.y + 70 + this.height &&
+       enemy.height + enemy.y+70 > this.y + 70) {
+      this.reset();
     }
-  })
+  }.bind(this));
 }
 player.prototype.reset = function(){
   this.x = 101*2;
@@ -77,7 +77,7 @@ enemyYpositions = [];
 var tileHeight = 83;
 enemyYpositions.push(tileHeight-20,tileHeight*2-20,tileHeight*3-20);
 
-var NumEnemies = 3;
+var NumEnemies = 7;
 
 var allEnemies = []
 setInterval(function(){
@@ -88,10 +88,9 @@ setInterval(function(){
     }
   });
   if (allEnemies.length < NumEnemies){
-    allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)],101));
+    allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)],Math.floor(Math.random() * 500)));
   }
 }, 2000);
-allEnemies.push(new Enemy(enemyYpositions[Math.floor(Math.random() * enemyYpositions.length)],101));
 
 var player = new player;
 
